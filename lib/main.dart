@@ -36,23 +36,21 @@ class _HomePageState extends State<HomePage> {
     "Dollme",
     "Gullash"
   ];
-  List<String> foods2 = [
-    'fli',
-    'Patate',
-  ];
+  List<String> foods2 = [];
+  // List<String> foods12 = [];
   //var list = [];
   //list= new List.from(foods).addAll(foods2);
   // var foods3 = foods + foods2;
   // Combining lists
   //gfg1.addAll(gfg2);
-  var foods12;
   @override
   void initState() {
-    foods12 = foods + foods2;
+    foods2.addAll(foods);
   }
 
-  late String name;
+  TextEditingController controller = TextEditingController();
   final _random = new Random();
+  bool isDeleted = false;
 
   var randomIndex;
 
@@ -79,7 +77,7 @@ class _HomePageState extends State<HomePage> {
               width: 200,
               color: Colors.cyan,
               child: Text(
-                foods12[0],
+                isDeleted ? foods[0] : foods2[0],
                 style: TextStyle(fontSize: 40),
               ),
               //   child: ListView(
@@ -93,9 +91,10 @@ class _HomePageState extends State<HomePage> {
               //   ),
             ),
             TextField(
-              onChanged: (str) {
-                name = str;
-              },
+              controller: controller,
+              // onChanged: (str) {
+              //   name = str;
+              // },
               maxLength: 20,
             ),
             Text(''),
@@ -107,7 +106,9 @@ class _HomePageState extends State<HomePage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    foods2.add(name);
+                    foods2.add(controller.text);
+
+                    print(foods2);
                   });
                 }),
             Text(''),
@@ -118,10 +119,14 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  print(foods12);
+                  setState(() {
+                    isDeleted ? foods.shuffle() : foods2.shuffle();
+                  });
+                  print(foods);
+                  print(foods2);
                   //var element = getRandomElement(foods);
                   //print(foods[randomIndex]);
-                  //sumL1L2.shuffle();
+
                   //var randomItem = (foods2..shuffle()).first;
                   //var element = foods[_random.nextInt(foods.length)];
                 }),
@@ -134,7 +139,13 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
-                foods2.clear();
+                setState(() {
+                  isDeleted = true;
+                  foods2.clear();
+                  print(foods);
+                  print(foods2);
+                });
+
                 //foods2.removeRange(3, foods2.length);
                 //foods.addAll(foods);
                 //print(foods);
