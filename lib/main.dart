@@ -20,46 +20,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // var foods = [
-  //   [
-  //     'Pasul',
-  //     'Dollme',
-  //     'Gullash'
-  //   ],
-  //   [
-  //     'Fli',
-  //     'Oriz'
-  //   ]
-  // ];
   List<String> foods = [
     "Pasul",
     "Dollme",
     "Gullash"
   ];
   List<String> foods2 = [];
-  // List<String> foods12 = [];
-  //var list = [];
-  //list= new List.from(foods).addAll(foods2);
-  // var foods3 = foods + foods2;
-  // Combining lists
-  //gfg1.addAll(gfg2);
+  //initState perdoret per te inicilizuar shprehjet qe do te perdoren ne te ardhmen
+  //ketu ne listen foods2 eshte shtuar komplet lista foods
   @override
   void initState() {
     foods2.addAll(foods);
   }
 
+  //nje kontrollues per nje textfield, kur eshte textfieldi i lidhur me textEditingController
+  //nese modifikohet teksti, textfieldi do te njoftohet dhe do te behet update
   TextEditingController controller = TextEditingController();
-  final _random = new Random();
   bool isDeleted = false;
-
-  var randomIndex;
-
-  //var foods3 = foods+foods2;
-  //var list = new List.from(foods)..addAll(foods2);
 
   @override
   Widget build(BuildContext context) {
-    randomIndex = foods[_random.nextInt(foods.length)];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -68,7 +48,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -80,24 +60,13 @@ class _HomePageState extends State<HomePage> {
                 isDeleted ? foods[0] : foods2[0],
                 style: TextStyle(fontSize: 40),
               ),
-              //   child: ListView(
-              //     shrinkWrap: true,
-              //     children: foods.map((element) => Text(foods[0])).toList(),
-              //     //children: foods.map((element) => Text(element)).toList(),
-              //     // itemCount: foods.length,
-              //     // itemBuilder: (context, index) {
-              //     //   return foods[index];
-              //     // },
-              //   ),
             ),
+            //textfieldi per te shkruar ushqimin ne kete rast, ku therret controllerin e
+            //deklaruar me lart, dhe pranon deri 20 karaktere.
             TextField(
               controller: controller,
-              // onChanged: (str) {
-              //   name = str;
-              // },
               maxLength: 20,
             ),
-            Text(''),
             RaisedButton(
                 color: Colors.blue,
                 child: Text(
@@ -105,13 +74,13 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
+                  //kur behet click merr tekstin e shkruar ne text field dhe e shton ne listen foods2
                   setState(() {
                     foods2.add(controller.text);
 
                     print(foods2);
                   });
                 }),
-            Text(''),
             RaisedButton(
                 color: Colors.yellow,
                 child: Text(
@@ -119,36 +88,28 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
+                  //kur klikohet nese variabla isDeletet eshte true behet shuffle foods
+                  //nese eshte false behet foods shuffle
                   setState(() {
                     isDeleted ? foods.shuffle() : foods2.shuffle();
                   });
                   print(foods);
                   print(foods2);
-                  //var element = getRandomElement(foods);
-                  //print(foods[randomIndex]);
-
-                  //var randomItem = (foods2..shuffle()).first;
-                  //var element = foods[_random.nextInt(foods.length)];
                 }),
-            Text(''),
             RaisedButton(
               color: Colors.red,
               child: Text(
                 'Delete List',
-                // 'Print foods',
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () {
+                //fshin te gjitha elementet ne listen foods2
                 setState(() {
                   isDeleted = true;
                   foods2.clear();
                   print(foods);
                   print(foods2);
                 });
-
-                //foods2.removeRange(3, foods2.length);
-                //foods.addAll(foods);
-                //print(foods);
               },
             ),
           ],
