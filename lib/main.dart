@@ -43,9 +43,8 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(
-            child: Text('Foods'),
-          ),
+          title: Text("Foods"),
+          centerTitle: true,
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
