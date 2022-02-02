@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     "Gullash"
   ];
   List<String> foods2 = [];
-  //initState perdoret kur na nevojitet qe te inicializojmm nje metod apo funksion ne hapje te pare te ketij file-i
+  //initState perdoret per te inicilizuar shprehjet qe do te perdoren ne te ardhmen
   //ketu ne listen foods2 eshte shtuar komplet lista foods
   @override
   void initState() {
@@ -37,8 +37,6 @@ class _HomePageState extends State<HomePage> {
   //nese modifikohet teksti, textfieldi do te njoftohet dhe do te behet update
   TextEditingController controller = TextEditingController();
   bool isDeleted = false;
-  
-  //add a dispose method to dispose the controller
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +87,8 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  //kur klikohet nese variabla isDeleted eshte true behet shuffle foods
-                  //nese eshte false behet foods2 shuffle
+                  //kur klikohet nese variabla isDeletet eshte true behet shuffle foods
+                  //nese eshte false behet foods shuffle
                   setState(() {
                     isDeleted ? foods.shuffle() : foods2.shuffle();
                   });
